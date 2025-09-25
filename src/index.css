@@ -7,138 +7,152 @@ All colors MUST be HSL.
 */
 
 @layer base {
-  :root {
-    /* Biotech dark theme inspired by modern pharma aesthetics */
-    --background: 215 28% 8%;
-    --foreground: 210 40% 98%;
+	:root {
+		/* Light theme: white background */
+		--background: 0 0% 100%;
+		--foreground: 215 28% 8%;
 
-    --card: 215 27% 12%;
-    --card-foreground: 210 40% 98%;
+		--card: 215 27% 12%;
+		--card-foreground: 210 40% 98%;
 
-    --popover: 215 27% 12%;
-    --popover-foreground: 210 40% 98%;
+		--popover: 215 27% 12%;
+		--popover-foreground: 210 40% 98%;
 
-    /* Emerald green primary - biotech accent */
-    --primary: 160 84% 39%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 160 84% 55%;
+		/* Emerald green primary - biotech accent */
+		--primary: 160 84% 39%;
+		--primary-foreground: 0 0% 100%;
+		--primary-glow: 160 84% 55%;
 
-    --secondary: 215 25% 18%;
-    --secondary-foreground: 210 40% 98%;
+		--secondary: 215 25% 18%;
+		--secondary-foreground: 210 40% 98%;
 
-    --muted: 215 25% 16%;
-    --muted-foreground: 215 20% 65%;
+		--muted: 215 25% 16%;
+		--muted-foreground: 215 20% 65%;
 
-    --accent: 160 84% 39%;
-    --accent-foreground: 0 0% 100%;
+		--accent: 160 84% 39%;
+		--accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+		--destructive: 10 84% 60%;
+		--destructive-foreground: 210 40% 98%;
 
-    --border: 215 25% 20%;
-    --input: 215 25% 18%;
-    --ring: 160 84% 39%;
+		--border: 215 25% 20%;
+		--input: 215 25% 18%;
+		--ring: 160 84% 39%;
 
-    --radius: 0.75rem;
+		--radius: 0.75rem;
 
-    /* Custom biotech design tokens */
-    --hero-gradient: linear-gradient(135deg, hsl(215 28% 8%), hsl(215 25% 12%));
-    --accent-gradient: linear-gradient(135deg, hsl(160 84% 39%), hsl(160 84% 55%));
-    --glow-effect: 0 0 40px hsl(160 84% 39% / 0.3);
-    --subtle-glow: 0 0 20px hsl(160 84% 39% / 0.1);
-    
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+		/* Custom biotech design tokens */
+		--hero-gradient: linear-gradient(
+			135deg,
+			hsl(215 28% 8%),
+			hsl(215 25% 12%)
+		);
+		--accent-gradient: linear-gradient(
+			135deg,
+			hsl(160 84% 39%),
+			hsl(160 84% 55%)
+		);
+		--glow-effect: 0 0 40px hsl(160 84% 39% / 0.3);
+		--subtle-glow: 0 0 20px hsl(160 84% 39% / 0.1);
 
-    --sidebar-background: 215 25% 16%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 160 84% 39%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 25% 18%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 215 25% 20%;
-    --sidebar-ring: 160 84% 39%;
-  }
+		/* Animations */
+		--transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		--transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  .dark {
-    --background: 215 28% 8%;
-    --foreground: 210 40% 98%;
-    --card: 215 27% 12%;
-    --card-foreground: 210 40% 98%;
-    --popover: 215 27% 12%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 160 84% 39%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 215 25% 18%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 215 25% 16%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 160 84% 39%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 215 25% 20%;
-    --input: 215 25% 18%;
-    --ring: 160 84% 39%;
-    --sidebar-background: 215 25% 16%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 160 84% 39%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 25% 18%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 215 25% 20%;
-    --sidebar-ring: 160 84% 39%;
-  }
+		--sidebar-background: 215 25% 16%;
+		--sidebar-foreground: 210 40% 98%;
+		--sidebar-primary: 160 84% 39%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 215 25% 18%;
+		--sidebar-accent-foreground: 210 40% 98%;
+		--sidebar-border: 215 25% 20%;
+		--sidebar-ring: 160 84% 39%;
+	}
+
+	.dark {
+		/* Keep dark variables consistent, but background should also be white per requirement */
+		--background: 0 0% 100%;
+		--foreground: 215 28% 8%;
+		--card: 215 27% 12%;
+		--card-foreground: 210 40% 98%;
+		--popover: 215 27% 12%;
+		--popover-foreground: 210 40% 98%;
+		--primary: 160 84% 39%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 215 25% 18%;
+		--secondary-foreground: 210 40% 98%;
+		--muted: 215 25% 16%;
+		--muted-foreground: 215 20% 65%;
+		--accent: 160 84% 39%;
+		--accent-foreground: 0 0% 100%;
+		--destructive: 10 84% 60%;
+		--destructive-foreground: 210 40% 98%;
+		--border: 215 25% 20%;
+		--input: 215 25% 18%;
+		--ring: 160 84% 39%;
+		--sidebar-background: 215 25% 16%;
+		--sidebar-foreground: 210 40% 98%;
+		--sidebar-primary: 160 84% 39%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 215 25% 18%;
+		--sidebar-accent-foreground: 210 40% 98%;
+		--sidebar-border: 215 25% 20%;
+		--sidebar-ring: 160 84% 39%;
+	}
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+	* {
+		@apply border-border;
+	}
 
-  body {
-    @apply bg-background text-foreground dark;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-  }
+	body {
+		@apply bg-background text-foreground;
+		font-feature-settings: 'rlig' 1, 'calt' 1;
+	}
 
-  /* Geometric background elements */
-  .biotech-orb {
-    position: absolute;
-    border-radius: 50%;
-    background: var(--accent-gradient);
-    filter: blur(1px);
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-  }
+	/* Geometric background elements */
+	.biotech-orb {
+		position: absolute;
+		border-radius: 50%;
+		background: var(--accent-gradient);
+		filter: blur(1px);
+		opacity: 0.1;
+		animation: float 6s ease-in-out infinite;
+	}
 
-  .biotech-orb-glow {
-    position: absolute;
-    border-radius: 50%;
-    background: hsl(var(--primary) / 0.05);
-    box-shadow: var(--glow-effect);
-  }
+	.biotech-orb-glow {
+		position: absolute;
+		border-radius: 50%;
+		background: hsl(var(--primary) / 0.05);
+		box-shadow: var(--glow-effect);
+	}
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-20px) scale(1.05); }
-  }
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0px) scale(1);
+		}
+		50% {
+			transform: translateY(-20px) scale(1.05);
+		}
+	}
 
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
+	/* Custom scrollbar */
+	::-webkit-scrollbar {
+		width: 8px;
+	}
 
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--muted));
-  }
+	::-webkit-scrollbar-track {
+		background: hsl(var(--muted));
+	}
 
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
-    border-radius: 4px;
-  }
+	::-webkit-scrollbar-thumb {
+		background: hsl(var(--destructive));
+		border-radius: 4px;
+	}
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary-glow));
-  }
+	::-webkit-scrollbar-thumb:hover {
+		background: hsl(var(--destructive-glow));
+	}
 }
