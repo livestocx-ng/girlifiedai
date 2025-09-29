@@ -51,17 +51,16 @@ const HeroSection = () => {
 								<ArrowRight className='ml-2 group-hover:translate-x-1 transition-transform' />
 							</Link>
 						</Button>
-						<Button
-							variant='outlineHero'
-							size='xl'
-							className='group'
-							asChild
-						>
-							<Link to='#'>
+						<Link to="/demo">
+							<Button
+								variant='outlineHero'
+								size='xl'
+								className='group'
+							>
 								<Play className='mr-2 group-hover:scale-110 transition-transform' />
 								Request a Demo
-							</Link>
-						</Button>
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>

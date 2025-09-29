@@ -26,11 +26,13 @@ const Navigation = () => {
 					</div>
 
 					<div className='flex items-center space-x-4'>
-						<Button variant='ghost' size='sm' asChild>
-							<Link to='#'>Request Demo</Link>
-						</Button>
-						<Button variant='destructive' size='sm' asChild>
-							<Link to='/demo'>Get Started</Link>
+						<Link to='/demo'>
+							<Button variant='ghost' size='sm'>
+								Request Demo
+							</Button>
+						</Link>
+						<Button variant='destructive' size='sm'>
+							Get Started
 						</Button>
 					</div>
 				</div>

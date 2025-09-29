@@ -4,6 +4,7 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
+import {useNavigate} from 'react-router-dom';
 import {
 	Select,
 	SelectContent,
@@ -29,6 +30,7 @@ interface DemoFormProps {
 
 export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 	const {toast} = useToast();
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		productName: '',
 		productType: '',
@@ -144,10 +146,10 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 											)
 										}
 									>
-										<SelectTrigger className='text-foreground/50'>
+										<SelectTrigger className='text-black'>
 											<SelectValue placeholder='Select product type' />
 										</SelectTrigger>
-										<SelectContent className='text-white'>
+										<SelectContent>
 											<SelectItem value='pharmaceutical'>
 												Pharmaceutical Drug
 											</SelectItem>
@@ -182,8 +184,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										)
 									}
 									placeholder='e.g., Type 2 Diabetes, Hypertension, Cancer'
-									className='text-black'
 									required
+									className='text-black'
 								/>
 							</div>
 
@@ -201,8 +203,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										)
 									}
 									placeholder="Describe your product's intended use, dosage, and key features..."
-									className='text-black'
 									rows={3}
+									className='text-black'
 								/>
 							</div>
 						</TabsContent>
@@ -222,8 +224,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										)
 									}
 									placeholder='Age range, gender, ethnicity, geographic regions, comorbidities...'
-									className='text-black'
 									rows={4}
+									className='text-black'
 								/>
 							</div>
 						</TabsContent>
@@ -243,8 +245,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										)
 									}
 									placeholder='How does your product work? What biological pathways does it target?'
-									className='text-black'
 									rows={4}
+									className='text-black'
 								/>
 							</div>
 
@@ -262,8 +264,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										)
 									}
 									placeholder='Any preclinical data, pilot studies, or relevant research...'
-									className='text-black'
 									rows={3}
+									className='text-black'
 								/>
 							</div>
 						</TabsContent>
@@ -283,8 +285,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										)
 									}
 									placeholder='Known side effects, drug interactions, contraindications...'
-									className='text-black'
 									rows={4}
+									className='text-black'
 								/>
 							</div>
 						</TabsContent>
@@ -304,7 +306,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 					<Button
 						type='submit'
 						disabled={isLoading}
-						className='w-full bg-gradient-primary hover:shadow-scientific transition-all duration-300'
+						// className='w-full bg-gradient-primary  hover:shadow-scientific transition-all duration-300'
+						className='w-full'
 						size='lg'
 					>
 						{isLoading ? (

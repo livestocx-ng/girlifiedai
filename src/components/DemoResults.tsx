@@ -1,42 +1,13 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
-import {Badge} from '@/components/ui/badge';
-import {Progress} from '@/components/ui/progress';
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import {
-	LineChart,
-	Line,
-	AreaChart,
-	Area,
-	BarChart,
-	Bar,
-	PieChart,
-	Pie,
-	Cell,
-	XAxis,
-	YAxis,
-	CartesianGrid,
-	Tooltip,
-	Legend,
-	ResponsiveContainer,
-} from 'recharts';
-import {
-	TrendingUp,
-	TrendingDown,
-	Users,
-	Shield,
-	Target,
-	AlertTriangle,
-	CheckCircle,
-	XCircle,
-} from 'lucide-react';
-import ReactMarkdown from "react-markdown";
-import sampleResults from '@/assets/sample-results.jpg';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { TrendingUp, TrendingDown, Users, Shield, Target, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
+import sampleResults from "@/assets/sample-results.jpg";
+import { set } from "date-fns";
+import { useEffect, useState } from "react";
+import ReactMarkdown from 'react-markdown'
 
 interface DemoResultsProps {
 	results: string;
@@ -45,20 +16,30 @@ interface DemoResultsProps {
 	targetCondition: string;
 }
 
-export const DemoResults = ({
-	results,
-	productName,
-	productType,
-	targetCondition,
-}: DemoResultsProps) => {
-	// Simulated data - in real implementation, this would come from the AI analysis
-	const efficacyData = [
-		{month: 'Month 1', placebo: 12, treatment: 28, improvement: 16},
-		{month: 'Month 2', placebo: 18, treatment: 45, improvement: 27},
-		{month: 'Month 3', placebo: 22, treatment: 62, improvement: 40},
-		{month: 'Month 6', placebo: 28, treatment: 78, improvement: 50},
-		{month: 'Month 12', placebo: 35, treatment: 85, improvement: 50},
-	];
+export const DemoResults = ({ results, productName, productType, targetCondition }: DemoResultsProps) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://venille-api.livestocx.xyz/v1/auth/generate-girlified-ai-report');
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+      fetchData();
+    }
+  }, []);
+
+  // Simulated data - in real implementation, this would come from the AI analysis
+  const efficacyData = [
+    { month: 'Month 1', placebo: 12, treatment: 28, improvement: 16 },
+    { month: 'Month 2', placebo: 18, treatment: 45, improvement: 27 },
+    { month: 'Month 3', placebo: 22, treatment: 62, improvement: 40 },
+    { month: 'Month 6', placebo: 28, treatment: 78, improvement: 50 },
+    { month: 'Month 12', placebo: 35, treatment: 85, improvement: 50 },
+  ];
 
 	const safetyData = [
 		{severity: 'Mild', count: 45, percentage: 65},
