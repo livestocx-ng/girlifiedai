@@ -1,6 +1,7 @@
 import heroImage from '@/assets/hero.jpg';
 import {Button} from '@/components/ui/button';
 import {ArrowRight, Play} from 'lucide-react';
+import {Link} from 'react-router-dom';
 
 const HeroSection = () => {
 	return (
@@ -24,7 +25,8 @@ const HeroSection = () => {
 						<span className='text-primary'>
 							Accelerate approvals
 						</span>{' '}
-						by simulating real world Clinical Trials <span className='text-primary'>through AI</span>
+						by simulating real world Clinical Trials{' '}
+						<span className='text-primary'>through AI</span>
 					</h1>
 
 					<p className='text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto'>
@@ -42,14 +44,16 @@ const HeroSection = () => {
 							Get Started
 							<ArrowRight className='ml-2 group-hover:translate-x-1 transition-transform' />
 						</Button>
-						<Button
-							variant='outlineHero'
-							size='xl'
-							className='group'
-						>
-							<Play className='mr-2 group-hover:scale-110 transition-transform' />
-							Request a Demo
-						</Button>
+						<Link to="/demo">
+							<Button
+								variant='outlineHero'
+								size='xl'
+								className='group'
+							>
+								<Play className='mr-2 group-hover:scale-110 transition-transform' />
+								Request a Demo
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>
