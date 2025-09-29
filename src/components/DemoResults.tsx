@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, TrendingDown, Users, Shield, Target, AlertTriangle, CheckCircle, XCircle } from "lucide-react";
 import sampleResults from "@/assets/sample-results.jpg";
+import { set } from "date-fns";
+import { useEffect, useState } from "react";
 
 interface DemoResultsProps {
   productName: string;
@@ -13,6 +15,21 @@ interface DemoResultsProps {
 }
 
 export const DemoResults = ({ productName, productType, targetCondition }: DemoResultsProps) => {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://venille-api.livestocx.xyz/v1/auth/generate-girlified-ai-report');
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+      fetchData();
+    }
+  }, []);
+
   // Simulated data - in real implementation, this would come from the AI analysis
   const efficacyData = [
     { month: 'Month 1', placebo: 12, treatment: 28, improvement: 16 },
@@ -128,7 +145,7 @@ export const DemoResults = ({ productName, productType, targetCondition }: DemoR
                 <CardTitle>Key Predictions</CardTitle>
                 <CardDescription>AI-generated insights for your product</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              {/* <CardContent className="space-y-4">
                 <div className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-success mt-0.5" />
                   <div>
@@ -150,7 +167,7 @@ export const DemoResults = ({ productName, productType, targetCondition }: DemoR
                     <p className="text-sm text-muted-foreground">Lower efficacy in patients over 65 years</p>
                   </div>
                 </div>
-              </CardContent>
+              </CardContent> */}
             </Card>
           </div>
           

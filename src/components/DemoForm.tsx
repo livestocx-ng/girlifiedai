@@ -4,6 +4,7 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
+import {useNavigate} from 'react-router-dom';
 import {
 	Select,
 	SelectContent,
@@ -29,6 +30,7 @@ interface DemoFormProps {
 
 export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 	const {toast} = useToast();
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		productName: '',
 		productType: '',
@@ -42,7 +44,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-
+		console.log('Form submitted with data:', formData);
 		if (
 			!formData.productName ||
 			!formData.productType ||
@@ -75,10 +77,12 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 			console.log('Simulation result:', result);
 			toast({
 				title: 'Simulation Started',
-				variant: 'success',
+				variant: 'default',
 				description:
 					'Your AI clinical trial simulation is now running.',
 			});
+			onSubmit(formData);
+			navigate('/results', {state: {data: result}});
 			setFormData({
 				productName: '',
 				productType: '',
