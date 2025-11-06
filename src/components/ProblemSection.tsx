@@ -1,26 +1,26 @@
-import {AlertTriangle, Clock, DollarSign, TrendingDown} from 'lucide-react';
+import {AlertTriangle, DollarSign, TrendingDown, BarChart3} from 'lucide-react';
 
 const ProblemSection = () => {
 	const stats = [
 		{
-			icon: Clock,
-			stat: '10+ years',
-			description: 'Average time to FDA approval',
+			icon: DollarSign,
+			stat: '$25B+',
+			description: 'AI + drug discovery funding since 2018',
 		},
 		{
-			icon: DollarSign,
-			stat: '$2.3B',
-			description: 'Average cost per approved drug',
+			icon: BarChart3,
+			stat: '90%+',
+			description: 'Funding focused on discovery, not regulatory',
 		},
 		{
 			icon: TrendingDown,
-			stat: '90%',
-			description: 'Failure rate in clinical trials',
+			stat: '73% (2025)',
+			description: 'Rejections due to inaccurate/incomplete data',
 		},
 		{
 			icon: AlertTriangle,
-			stat: 'Most failures',
-			description: 'Are predictable with proper testing',
+			stat: 'Root causes',
+			description: "Designs miss FDA needs, docs misaligned, data gaps",
 		},
 	];
 
@@ -29,14 +29,14 @@ const ProblemSection = () => {
 			<div className='container mx-auto px-6'>
 				<div className='max-w-4xl mx-auto text-center mb-16'>
 					<h2 className='text-4xl md:text-5xl font-bold mb-6'>
-						The Problem is{' '}
-						<span className='text-destructive'>Clear</span>
+						AI Regulatory Gap —
+						<span className='text-destructive'> The Hidden Failure Mode</span>
 					</h2>
 					<p className='text-xl text-muted-foreground leading-relaxed'>
-						Bringing a new health product to market is slow,
-						expensive, and uncertain. Most failures are predictable
-						if products are tested against real-world diversity
-						before entering humans.
+						Most biotech and medtech failures aren’t due to weak
+						science — they stem from trial designs that don’t meet
+						FDA expectations, inconsistent documentation, and
+						misaligned or incomplete data in submissions.
 					</p>
 				</div>
 
@@ -61,14 +61,12 @@ const ProblemSection = () => {
 
 				<div className='mt-16 p-8 bg-destructive/5 rounded-2xl border border-destructive/20'>
 					<p className='text-lg text-center max-w-3xl mx-auto'>
-						<span className='font-semibold text-destructive'>
-							The reality:
-						</span>{' '}
-						The average drug takes over 10 years and $2.3 billion to
-						reach FDA approval — and 90% of candidates fail in
-						trials. Most of these failures are predictable if
-						products are tested against real-world diversity before
-						entering humans.
+						<span className='font-semibold text-destructive'>Reality (2025):</span>{' '}
+						73% of rejected FDA submissions failed due to inaccurate or
+						incomplete data. Investment has flowed into discovery,
+						but regulatory and clinical translation remain a blue
+						ocean — where better design, aligned documentation, and
+						data transparency can change outcomes.
 					</p>
 				</div>
 			</div>

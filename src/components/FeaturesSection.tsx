@@ -3,40 +3,40 @@ import {Brain, TrendingUp, Users, Target, Database, Zap} from 'lucide-react';
 const FeaturesSection = () => {
 	const features = [
 		{
-			icon: Brain,
-			title: 'AI Clinical Simulation',
-			description:
-				'Test your product in realistic synthetic trials with advanced machine learning models',
-		},
-		{
 			icon: TrendingUp,
-			title: 'Predictive Analytics',
+			title: 'FDA Outcome Prediction',
 			description:
-				'Forecast likely FDA outcomes and identify risks before they become costly problems',
-		},
-		{
-			icon: Users,
-			title: 'Diversity Modeling',
-			description:
-				'Ensure your product works across varied patient populations and demographics',
+				'Predict approval vs. rejection probability using FDA/EMA historical decisions',
 		},
 		{
 			icon: Target,
-			title: 'Actionable Insights',
+			title: 'Regulatory Strategy Modelling',
 			description:
-				'Get specific improvement recommendations when simulations identify potential issues',
+				'Recommend optimal endpoints, comparators, and inclusion/exclusion criteria',
 		},
 		{
 			icon: Database,
-			title: 'Multimodal Data Integration',
+			title: 'Automated Dossier Authoring',
 			description:
-				'Leverages molecular, genomic, and clinical datasets for comprehensive analysis',
+				'Auto-generate FDA-aligned sections from structured datasets and precedents',
+		},
+		{
+			icon: Users,
+			title: 'AI Collaboration Hub',
+			description:
+				'Connect regulatory, clinical, and data teams with shared context and reviews',
+		},
+		{
+			icon: Brain,
+			title: 'Explainable AI Layer',
+			description:
+				'Trace every recommendation to source evidence with full audit trails',
 		},
 		{
 			icon: Zap,
-			title: 'Rapid Iteration',
+			title: 'Risk & Compliance Alerts',
 			description:
-				'Quickly test modifications and improvements without lengthy trial processes',
+				'Flag compliance gaps, data inconsistencies, and transparency issues early',
 		},
 	];
 
@@ -48,8 +48,7 @@ const FeaturesSection = () => {
 						Key <span className='text-primary'>Features</span>
 					</h2>
 					<p className='text-xl text-muted-foreground'>
-						Comprehensive AI-powered simulation capabilities
-						designed for modern biotech innovation
+						Core capabilities that power “GitHub Copilot for FDA Submissions”
 					</p>
 				</div>
 

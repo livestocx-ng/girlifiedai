@@ -10,26 +10,28 @@ import {
 const SolutionSection = () => {
 	const capabilities = [
 		{
-			icon: Shield,
-			title: 'Efficacy Testing',
-			description:
-				'Validate product effectiveness across diverse populations',
-		},
-		{
-			icon: Users,
-			title: 'Safety Analysis',
-			description: 'Identify potential risks before human trials',
-		},
-		{
 			icon: BarChart3,
-			title: 'Biomarker Response',
-			description: 'Predict biological responses and interactions',
+			title: 'FDA Outcome Prediction',
+			description:
+				'Simulate approval likelihood before submission using 20+ years of FDA/EMA data',
+		},
+		{
+			icon: Brain,
+			title: 'Regulatory Strategy Modelling',
+			description:
+				'Optimize trial designs, endpoints, comparators, and inclusion criteria',
 		},
 		{
 			icon: Database,
-			title: 'Market Diversity',
+			title: 'Automated Dossier Authoring',
 			description:
-				'Test across ethnicity, comorbidities, and lifestyle factors',
+				'Generate FDA-aligned submissions from structured datasets with precedent-based drafting',
+		},
+		{
+			icon: Users,
+			title: 'AI Collaboration Hub',
+			description:
+				'Unite regulatory, clinical, and data teams in one explainable workspace',
 		},
 	];
 
@@ -38,13 +40,13 @@ const SolutionSection = () => {
 			<div className='container mx-auto px-6'>
 				<div className='max-w-4xl mx-auto text-center mb-16'>
 					<h2 className='text-4xl md:text-5xl font-bold mb-6'>
-						Our <span className='text-primary'>AI Solution</span>
+						RegOps <span className='text-primary'>Copilot</span>
 					</h2>
 					<p className='text-xl text-muted-foreground leading-relaxed'>
-						We built an AI and machine learning platform that
-						simulates real-world clinical trials for biotech
-						companies, pharma innovators, and health product
-						startups.
+						“GitHub Copilot for FDA Submissions.” An AI-powered
+						Regulatory Intelligence platform trained on historical FDA/EMA
+						decisions to predict outcomes, flag risks, and auto-generate
+						dossiers — with full explainability and audit trails.
 					</p>
 				</div>
 
@@ -53,22 +55,18 @@ const SolutionSection = () => {
 						<div className='flex items-center mb-6'>
 							<Brain className='w-8 h-8 text-primary mr-3' />
 							<h3 className='text-2xl font-bold'>
-								AI Clinical Simulation
+								FDA Simulation Engine
 							</h3>
 						</div>
 						<p className='text-lg text-muted-foreground mb-6'>
-							Whether it's a new drug, medical device, or advanced
-							consumer health products, our models generate
-							synthetic patient cohorts to comprehensively test
-							your innovations.
+							Train on approval letters, Complete Response Letters (CRLs),
+							and trial outcomes to model regulatory paths — before you
+							submit.
 						</p>
 						<p className='text-lg'>
-							<span className='font-semibold text-primary'>
-								Result:
-							</span>{' '}
-							Pre-screen your product, predict failures, and fix
-							weaknesses before entering high-risk, high-cost FDA
-							phases.
+							<span className='font-semibold text-primary'>Outcome:</span>{' '}
+							De-risk submissions, align trial design with FDA
+							expectations, and increase approval readiness.
 						</p>
 					</div>
 
@@ -98,13 +96,12 @@ const SolutionSection = () => {
 						<Lightbulb className='w-8 h-8 text-primary mr-4 mt-1 flex-shrink-0' />
 						<div>
 							<h3 className='text-xl font-bold mb-3'>
-								Actionable Intelligence
+								Explainable, Auditable AI
 							</h3>
 							<p className='text-lg'>
-								If your product fails simulation, our AI doesn't
-								just tell you it failed — it suggests specific
-								areas for improvement, helping you iterate
-								faster and smarter.
+								Every recommendation traces back to historical precedents
+								and data lineage. Built to align with the FDA’s 2025 AI
+								guidance on transparency and accountability.
 							</p>
 						</div>
 					</div>

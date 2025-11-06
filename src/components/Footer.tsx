@@ -4,11 +4,13 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <div className="w-4 h-4 rounded-full bg-primary-foreground"></div>
-              </div>
-              <span className="text-xl font-bold">SimuTrial</span>
+            <div className="flex items-start space-x-2 mb-4">
+            <img
+							src='/public/girlifiedai.png'
+							alt='Logo'
+							className='w-10 h-10 object-contain'
+						/>
+              <span className="text-xl font-bold">Girlified AI</span>
             </div>
             <p className="text-muted-foreground max-w-md">
               AI-powered clinical simulation platform helping biotech innovators 

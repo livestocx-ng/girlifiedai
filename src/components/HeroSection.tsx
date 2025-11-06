@@ -21,20 +21,35 @@ const HeroSection = () => {
 			{/* Content */}
 			<div className='relative z-10 container mx-auto px-6 text-center'>
 				<div className='max-w-4xl mx-auto'>
-					<h1 className='text-5xl md:text-7xl font-bold mb-6 leading-tight text-white'>
-						<span className='text-primary'>
-							Accelerate approvals
-						</span>{' '}
-						by simulating real world Clinical Trials{' '}
-						<span className='text-primary'>through AI</span>
+					<h1
+						className='text-5xl md:text-7xl font-bold mb-6 leading-tight text-white'
+						style={{
+							textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)',
+						}}
+					>
+						<span>Accelerate clinical approvals using AI</span>{' '}
+						{/* by simulating real world Clinical Trials{' '}
+						<span className='text-primary'>through AI</span> */}
 					</h1>
 
-					<p className='text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto'>
-						Test, validate, and improve your health products before
-						costly clinical trials.
+					<p
+						className='text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto'
+						style={{
+							textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)',
+						}}
+					>
+						{/* Test, validate, and improve your health products before
+						costly clinical trials. */}
+						Use AI-driven regulatory and clinical simulation to
+						refine your health products before costly trials.
 					</p>
 
-					<p className='text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium text-white'>
+					<p
+						className='text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium text-white'
+						style={{
+							textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)',
+						}}
+					>
 						Build safer, faster, and more effective biotech
 						innovations.
 					</p>
@@ -51,7 +66,7 @@ const HeroSection = () => {
 								<ArrowRight className='ml-2 group-hover:translate-x-1 transition-transform' />
 							</Link>
 						</Button>
-						<Link to="/demo">
+						<Link to='/demo'>
 							<Button
 								variant='outlineHero'
 								size='xl'

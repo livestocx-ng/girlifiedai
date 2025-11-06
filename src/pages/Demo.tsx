@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
 import {useState} from 'react';
 import heroBg from '@/assets/hero.jpg';

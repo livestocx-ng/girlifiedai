@@ -4,31 +4,31 @@ const BenefitsSection = () => {
 	const benefits = [
 		{
 			icon: DollarSign,
-			title: 'Save Billions in Wasted R&D',
+			title: 'Cut Manual Data Queries',
 			description:
-				'Reduce failed trials by identifying issues before expensive clinical phases',
-			highlight: 'Billions saved',
+				'Reduce regulatory data digging and reconciliation effort by 70%',
+			highlight: '−70% effort',
 		},
 		{
 			icon: Clock,
-			title: 'Shorten Time-to-Market by Years',
+			title: 'Shorten Database Lock Times',
 			description:
-				'Accelerate product development with faster iteration cycles',
-			highlight: 'Years faster',
-		},
-		{
-			icon: Shield,
-			title: 'Improve Safety & Equity',
-			description:
-				'Ensure products work safely across diverse patient populations',
-			highlight: 'Better outcomes',
+				'Accelerate readiness with structured evidence and automated checks',
+			highlight: '50%+ faster',
 		},
 		{
 			icon: TrendingUp,
-			title: 'Increase FDA Approval Readiness',
+			title: 'Accelerate Submission Timelines',
 			description:
-				'Enter clinical trials with higher confidence and success probability',
-			highlight: 'Higher success rate',
+				'Bring submissions forward with aligned design and documentation',
+			highlight: 'Up to 40% faster',
+		},
+		{
+			icon: Shield,
+			title: 'Improve Approval Success Rates',
+			description:
+				'Increase approval readiness by aligning to regulatory standards and precedents',
+			highlight: 'Higher success',
 		},
 	];
 
@@ -37,11 +37,10 @@ const BenefitsSection = () => {
 			<div className='container mx-auto px-6'>
 				<div className='max-w-4xl mx-auto text-center mb-16'>
 					<h2 className='text-4xl md:text-5xl font-bold mb-6'>
-						Why It <span className='text-primary'>Matters</span>
+						<span className='text-primary'>Impact</span> that Matters
 					</h2>
 					<p className='text-xl text-muted-foreground'>
-						Transform your product development process with
-						measurable impact
+						Align design and documentation with regulatory standards to move faster
 					</p>
 				</div>
 
