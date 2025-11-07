@@ -27,9 +27,9 @@ const HeroSection = () => {
 							textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)',
 						}}
 					>
-						<span>Accelerate clinical approvals using AI</span>{' '}
-						{/* by simulating real world Clinical Trials{' '}
-						<span className='text-primary'>through AI</span> */}
+						Accelerate{' '}
+						<span className='text-orange-500'>FDA approvals</span>{' '}
+						using AI
 					</h1>
 
 					<p

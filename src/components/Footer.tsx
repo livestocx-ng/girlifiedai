@@ -6,7 +6,7 @@ const Footer = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-start space-x-2 mb-4">
             <img
-							src='/public/girlifiedai.png'
+							src='/girlifiedai.png'
 							alt='Logo'
 							className='w-10 h-10 object-contain'
 						/>

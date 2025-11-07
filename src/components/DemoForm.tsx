@@ -25,6 +25,7 @@ import {Loader2, FileText, Users, Target, Shield, X} from 'lucide-react';
 type DemoFormFields = {
 	productName: string;
 	productType: string;
+	developmentStage: string;
 	targetCondition: string;
 	description: string;
 	targetDemographics: string;
@@ -49,6 +50,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 		productType: '',
 		targetCondition: '',
 		description: '',
+		developmentStage: '',
 		targetDemographics: '',
 		expectedMechanism: '',
 		previousStudies: '',
@@ -397,23 +399,73 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								)}
 							</div>
 
-							<div className='space-y-2'>
-								<Label htmlFor='targetCondition'>
-									Target Condition *
-								</Label>
-								<Input
-									id='targetCondition'
-									value={formData.targetCondition}
-									onChange={(e) =>
-										handleInputChange(
-											'targetCondition',
-											e.target.value
-										)
-									}
-									placeholder='e.g., Type 2 Diabetes, Hypertension, Cancer'
-									required
-									className='text-black'
-								/>
+							<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+								<div className='space-y-2'>
+									<Label htmlFor='developmentStage'>
+										Development Stage *
+									</Label>
+									<Select
+										value={formData.developmentStage}
+										onValueChange={(value) =>
+											handleInputChange(
+												'developmentStage',
+												value
+											)
+										}
+									>
+										<SelectTrigger className='text-black'>
+											<SelectValue placeholder='Select product type' />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value='discovery'>
+												Discovery
+											</SelectItem>
+											<SelectItem value='preclinical-studies'>
+												Preclinical Studies
+											</SelectItem>
+											<SelectItem value='first-regulatory-filing'>
+												First Regulatory Filing
+											</SelectItem>
+											<SelectItem value='clinical-trials-phase-I'>
+												Clinical Trials Phase I
+											</SelectItem>
+											<SelectItem value='clinical-trials-phase-II'>
+												Clinical Trials Phase II
+											</SelectItem>
+											<SelectItem value='clinical-trials-phase-III'>
+												Clinical Trials Phase III
+											</SelectItem>
+											<SelectItem value='regulatory-filing-for-approval'>
+												Regulatory Filing For Approval
+											</SelectItem>
+											<SelectItem value='access-to-drug'>
+												Access To Drug
+											</SelectItem>
+											<SelectItem value='post-approval-studies'>
+												Post Approval Studies
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+
+								<div className='space-y-2'>
+									<Label htmlFor='targetCondition'>
+										Target Condition *
+									</Label>
+									<Input
+										id='targetCondition'
+										value={formData.targetCondition}
+										onChange={(e) =>
+											handleInputChange(
+												'targetCondition',
+												e.target.value
+											)
+										}
+										placeholder='e.g., Type 2 Diabetes, Hypertension, Cancer'
+										required
+										className='text-black'
+									/>
+								</div>
 							</div>
 
 							<div className='space-y-2'>
@@ -539,7 +591,9 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 						disabled={isLoading}
 						// className='w-full bg-gradient-primary  hover:shadow-scientific transition-all duration-300'
 						className={`w-full ${
-							activeTab === tabOrder[tabOrder.length - 1] ? 'block' : 'hidden'
+							activeTab === tabOrder[tabOrder.length - 1]
+								? 'block'
+								: 'hidden'
 						}`}
 						size='lg'
 					>

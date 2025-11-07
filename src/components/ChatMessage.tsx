@@ -29,6 +29,14 @@ export const ChatMessage = ({
 		}
 	}, [content, currentIndex, isTyping]);
 
+	const cleanedContent = content
+		// Remove "Thread ID: ..." line
+		.replace(/Thread ID:.*\n?/gi, '')
+		// Remove "Approval Rating (...)" line
+		.replace(/Approval Rating\s*\(\d+–100\)\s*\n?/gi, '')
+		// Trim extra newlines
+		.trim();
+
 	return (
 		<motion.div
 			initial={{opacity: 0, y: 10}}
@@ -57,16 +65,16 @@ export const ChatMessage = ({
 					{isTyping ? (
 						<>
 							{displayedContent}
-							{currentIndex < content.length && (
+							{currentIndex < cleanedContent.length && (
 								<span className='inline-block w-1 h-4 ml-1 bg-primary animate-pulse' />
 							)}
 						</>
 					) : role === 'assistant' ? (
-						<div className='prose prose-sm max-w-none text-foreground/90'>
-							<ReactMarkdown>{content}</ReactMarkdown>
+						<div className='prose prose-sm text-xs max-w-none text-foreground/90'>
+							<ReactMarkdown>{cleanedContent}</ReactMarkdown>
 						</div>
 					) : (
-						content
+						cleanedContent
 					)}
 				</div>
 			</div>
