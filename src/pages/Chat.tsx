@@ -155,7 +155,7 @@ const ChatPage = () => {
 				<ChatHeader sessionId={displaySessionId} />
 
 				<ScrollArea className='flex-1 px-4'>
-					<div className='max-w-4xl mx-auto py-8'>
+					<div className='max-w-4l mx-aut py-8 pr-16'>
 						{messages.length === 0 ? (
 							<div className='flex items-center justify-center h-[50vh]'>
 								<div className='text-center space-y-4'>

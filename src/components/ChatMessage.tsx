@@ -42,8 +42,8 @@ export const ChatMessage = ({
 			initial={{opacity: 0, y: 10}}
 			animate={{opacity: 1, y: 0}}
 			transition={{duration: 0.3}}
-			className={`flex gap-4 p-6 ${
-				role === 'assistant' ? 'bg-muted/10 rounded-sm' : ''
+			className={`flex gap-2 p-4 ${
+				role === 'assistant' ? 'bg-mute/10 rounded-sm' : ''
 			}`}
 		>
 			<div
@@ -61,7 +61,7 @@ export const ChatMessage = ({
 				<div className='font-semibold text-sm text-foreground'>
 					{role === 'assistant' ? 'AI Assistant' : 'You'}
 				</div>
-				<div className='text-foreground/90 leading-relaxed whitespace-pre-wrap break-words'>
+				<div className='text-foreground/90 leading-relaxed whitespace-pre-wrap break-words text-[13px]'>
 					{isTyping ? (
 						<>
 							{displayedContent}
@@ -70,7 +70,7 @@ export const ChatMessage = ({
 							)}
 						</>
 					) : role === 'assistant' ? (
-						<div className='prose prose-sm text-xs max-w-none text-foreground/90'>
+						<div className='prose prose-sm  max-w-none text-foreground/90'>
 							<ReactMarkdown>{cleanedContent}</ReactMarkdown>
 						</div>
 					) : (
