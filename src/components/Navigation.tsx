@@ -8,8 +8,8 @@ const Navigation = () => {
 				<div className='flex items-center justify-between'>
 					<div className='flex items-center space-x-2'>
 						<img
-							src='/public/girlifiedai.png'
 							alt='Logo'
+							src='/girlifiedai.png'
 							className='mx-auto w-10 h-10 object-contain'
 						/>
 						<span className='text-xl font-bold'>Girlified AI</span>

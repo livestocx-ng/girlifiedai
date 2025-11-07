@@ -1,35 +1,114 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 import heroBg from '@/assets/hero.jpg';
 import {Link} from 'react-router-dom';
-import {ArrowLeft} from 'lucide-react';
+import {ArrowLeft, Loader2} from 'lucide-react';
 import {Button} from '@/components/ui/button';
-import {DemoForm} from '@/components/DemoForm';
+import {DemoForm, DemoFormSubmitPayload} from '@/components/DemoForm';
 import {DemoResults} from '@/components/DemoResults';
+import {useNavigate} from 'react-router-dom';
+
+const DEMO_CHAT_STORAGE_KEY = 'girlified-demo-chat';
 
 export const Demo = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [results, setResults] = useState<any>(null);
-	const [apiResults, setAPIResults] = useState<string>(null);
+	const [apiResults, setAPIResults] = useState<string | null>(null);
+	const navigate = useNavigate();
 
-	const handleDemoSubmit = async (formData: any) => {
+	const loadingMessages = useMemo(
+		() => [
+			'Generating AI-powered clinical trial insights...',
+			'Evaluating efficacy, safety, and demographic coverage...',
+			'Simulating thousands of synthetic patient journeys...',
+		],
+		[]
+	);
+
+	const handleDemoSubmit = async (formData: DemoFormSubmitPayload) => {
 		try {
 			setIsLoading(true);
+
+			const {supportingFiles = [], ...payload} = formData || {};
+			const multipartData = new FormData();
+
+			Object.entries(payload).forEach(([key, value]) => {
+				if (value !== undefined && value !== null) {
+					multipartData.append(key, value as string);
+				}
+			});
+
+			(supportingFiles as File[]).forEach((file) => {
+				multipartData.append('files', file);
+			});
 
 			// Simulate API call with realistic delay
 			// await new Promise(resolve => setTimeout(resolve, 3000));
 			const response = await axios.post(
 				'https://venille-api.livestocx.xyz/v1/auth/generate-girlified-ai-report',
-				formData
+				multipartData,
+				{
+					headers: {
+						'Content-Type': 'multipart/form-data',
+					},
+				}
 			);
 
 			console.log(`[FORM-DATA] :: ${response.data}`);
 
-			setResults(formData);
-			setAPIResults(response.data);
+			setResults(payload);
 
+			const formattedReport =
+				typeof response.data === 'string'
+					? response.data
+					: JSON.stringify(response.data, null, 2);
+
+			const promptSections = [
+				`Run a comprehensive clinical trial simulation for ${formData.productName} (${formData.productType}) targeting ${formData.targetCondition}.`,
+				formData.description
+					? `Product description: ${formData.description}`
+					: null,
+				formData.targetDemographics
+					? `Target demographics: ${formData.targetDemographics}`
+					: null,
+				formData.expectedMechanism
+					? `Expected mechanism of action: ${formData.expectedMechanism}`
+					: null,
+				formData.previousStudies
+					? `Previous studies or supporting data: ${formData.previousStudies}`
+					: null,
+				formData.riskAssessment
+					? `Known risks or contraindications: ${formData.riskAssessment}`
+					: null,
+			]
+				.filter(Boolean)
+				.join('\n\n');
+
+			const chatPayload = {
+				initialPrompt: promptSections,
+				assistantResponse: formattedReport,
+				submittedAt: new Date().toISOString(),
+				productSummary: {
+					productName: formData.productName,
+					productType: formData.productType,
+					targetCondition: formData.targetCondition,
+				},
+			};
+
+			try {
+				sessionStorage.setItem(
+					DEMO_CHAT_STORAGE_KEY,
+					JSON.stringify(chatPayload)
+				);
+			} catch (error) {
+				console.error('Failed to cache chat payload', error);
+			}
+
+			setAPIResults(formattedReport);
 			setIsLoading(false);
+
+			navigate('/chat', {state: chatPayload});
 		} catch (error) {
 			setIsLoading(false);
 
@@ -43,7 +122,26 @@ export const Demo = () => {
 	};
 
 	return (
-		<div className='min-h-screen bg-background'>
+		<div className='min-h-screen bg-background relative'>
+			{isLoading && (
+				<div className='fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/90 backdrop-blur-sm gap-4 px-6 text-center'>
+					<Loader2 className='h-12 w-12 animate-spin text-primary' />
+					<div className='space-y-2'>
+						<p className='text-xl font-semibold text-foreground'>
+							Generating AI clinical report...
+						</p>
+						<p className='text-sm text-muted-foreground max-w-xl'>
+							{
+								loadingMessages[
+									Math.floor(Date.now() / 3000) %
+										loadingMessages.length
+								]
+							}
+						</p>
+					</div>
+				</div>
+			)}
+
 			{/* Hero Section */}
 			<div
 				className='relative bg-gradient-hero bg-cover bg-center py-16'

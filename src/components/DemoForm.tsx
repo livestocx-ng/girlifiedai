@@ -1,10 +1,9 @@
-import {useState} from 'react';
+import {useState, useRef, ChangeEvent, DragEvent} from 'react';
 import {useToast} from '@/hooks/use-toast';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
-import {useNavigate} from 'react-router-dom';
 import {
 	Select,
 	SelectContent,
@@ -21,17 +20,31 @@ import {
 } from '@/components/ui/card';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Progress} from '@/components/ui/progress';
-import {Loader2, FileText, Users, Target, Shield} from 'lucide-react';
+import {Loader2, FileText, Users, Target, Shield, X} from 'lucide-react';
+
+type DemoFormFields = {
+	productName: string;
+	productType: string;
+	targetCondition: string;
+	description: string;
+	targetDemographics: string;
+	expectedMechanism: string;
+	previousStudies: string;
+	riskAssessment: string;
+};
+
+export type DemoFormSubmitPayload = DemoFormFields & {
+	supportingFiles: File[];
+};
 
 interface DemoFormProps {
-	onSubmit: (data: any) => void;
+	onSubmit: (data: DemoFormSubmitPayload) => void;
 	isLoading: boolean;
 }
 
 export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 	const {toast} = useToast();
-	const navigate = useNavigate();
-	const [formData, setFormData] = useState({
+	const [formData, setFormData] = useState<DemoFormFields>({
 		productName: '',
 		productType: '',
 		targetCondition: '',
@@ -41,6 +54,75 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 		previousStudies: '',
 		riskAssessment: '',
 	});
+	const [supportingFiles, setSupportingFiles] = useState<File[]>([]);
+	const [isDragging, setIsDragging] = useState(false);
+	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	const ACCEPTED_EXTENSIONS = ['pdf', 'jpg', 'jpeg', 'json', 'csv', 'xlsx'];
+	const ACCEPT_ATTRIBUTE = '.pdf,.png,.jpg,.jpeg,.json,.csv,.xlsx';
+	const tabOrder: Array<'basic' | 'demographics' | 'mechanism' | 'safety'> = [
+		'basic',
+		'demographics',
+		'mechanism',
+		'safety',
+	];
+	const [activeTab, setActiveTab] =
+		useState<(typeof tabOrder)[number]>('basic');
+	const [visitedTabs, setVisitedTabs] = useState<Set<string>>(
+		new Set(['basic'])
+	);
+
+	const goToTab = (value: (typeof tabOrder)[number]) => {
+		setActiveTab(value);
+		setVisitedTabs((prev) => {
+			if (prev.has(value)) {
+				return prev;
+			}
+			const next = new Set(prev);
+			next.add(value);
+			return next;
+		});
+	};
+
+	const handleTabChange = (value: string) => {
+		if (tabOrder.includes(value as (typeof tabOrder)[number])) {
+			goToTab(value as (typeof tabOrder)[number]);
+		}
+	};
+
+	const renderTabNavigation = (tab: (typeof tabOrder)[number]) => {
+		const currentIndex = tabOrder.indexOf(tab);
+		const total = tabOrder.length;
+
+		return (
+			<div className='flex items-center justify-between pt-4'>
+				<span className='text-xs text-muted-foreground'>{`Step ${
+					currentIndex + 1
+				} of ${total}`}</span>
+				<div className='flex gap-2'>
+					{currentIndex > 0 && (
+						<Button
+							type='button'
+							variant='outline'
+							color='black'
+							className='text-black'
+							onClick={() => goToTab(tabOrder[currentIndex - 1])}
+						>
+							Previous
+						</Button>
+					)}
+					{currentIndex < total - 1 && (
+						<Button
+							type='button'
+							onClick={() => goToTab(tabOrder[currentIndex + 1])}
+						>
+							Next
+						</Button>
+					)}
+				</div>
+			</div>
+		);
+	};
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -59,11 +141,94 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 			return;
 		}
 
-		onSubmit(formData);
+		const hasVisitedAllTabs = tabOrder.every((tab) => visitedTabs.has(tab));
+
+		if (!hasVisitedAllTabs) {
+			const nextTab = tabOrder.find((tab) => !visitedTabs.has(tab));
+			if (nextTab) {
+				goToTab(nextTab);
+			}
+
+			toast({
+				title: 'Review Required Sections',
+				description:
+					'Please review each tab of the form before submitting your request.',
+				variant: 'destructive',
+			});
+			return;
+		}
+
+		const payload: DemoFormSubmitPayload = {
+			...formData,
+			supportingFiles,
+		};
+
+		onSubmit(payload);
 	};
 
-	const handleInputChange = (field: string, value: string) => {
+	const handleInputChange = (field: keyof DemoFormFields, value: string) => {
 		setFormData((prev) => ({...prev, [field]: value}));
+	};
+
+	const handleFiles = (files: FileList | null) => {
+		if (!files?.length) {
+			return;
+		}
+
+		const incoming = Array.from(files);
+		const valid: File[] = [];
+		const rejected: string[] = [];
+
+		incoming.forEach((file) => {
+			const extension = file.name.split('.').pop()?.toLowerCase();
+			if (!extension || !ACCEPTED_EXTENSIONS.includes(extension)) {
+				rejected.push(file.name);
+				return;
+			}
+			valid.push(file);
+		});
+
+		if (rejected.length) {
+			toast({
+				title: 'Unsupported file export type',
+				description: `The following files were skipped: ${rejected.join(
+					', '
+				)}. Allowed types: ${ACCEPTED_EXTENSIONS.join(', ')}.`,
+				variant: 'destructive',
+			});
+		}
+
+		if (valid.length) {
+			setSupportingFiles((prev) => {
+				const existingKeys = new Set(
+					prev.map((file) => `${file.name}-${file.lastModified}`)
+				);
+				const deduped = valid.filter(
+					(file) =>
+						!existingKeys.has(`${file.name}-${file.lastModified}`)
+				);
+				return [...prev, ...deduped];
+			});
+		}
+	};
+
+	const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		handleFiles(event.target.files);
+		event.target.value = '';
+	};
+
+	const handleDrop = (event: DragEvent<HTMLDivElement>) => {
+		event.preventDefault();
+		setIsDragging(false);
+		handleFiles(event.dataTransfer?.files ?? null);
+	};
+
+	const handleDragOver = (event: DragEvent<HTMLDivElement>) => {
+		event.preventDefault();
+	};
+
+	const handleRemoveFile = (index: number) => {
+		setSupportingFiles((prev) => prev.filter((_, idx) => idx !== index));
 	};
 
 	return (
@@ -81,7 +246,11 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 
 			<CardContent className='p-6'>
 				<form onSubmit={handleSubmit} className='space-y-6'>
-					<Tabs defaultValue='basic' className='w-full'>
+					<Tabs
+						value={activeTab}
+						onValueChange={handleTabChange}
+						className='w-full'
+					>
 						<TabsList className='grid w-full grid-cols-4'>
 							<TabsTrigger
 								value='basic'
@@ -171,6 +340,64 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 							</div>
 
 							<div className='space-y-2'>
+								<Label>Supporting Documents</Label>
+								<div
+									onClick={() =>
+										fileInputRef.current?.click()
+									}
+									onDragOver={handleDragOver}
+									onDragEnter={() => setIsDragging(true)}
+									onDragLeave={() => setIsDragging(false)}
+									onDrop={handleDrop}
+									className={`flex flex-col items-center justify-center gap-2 rounded-lg border-2 border-dashed border-slate-500 px-4 py-6 text-center transition-colors cursor-pointer ${
+										isDragging
+											? 'border-primary bg-primary/5'
+											: 'border-border'
+									}`}
+								>
+									<span className='text-sm font-medium text-white'>
+										Drop files here or click to upload
+									</span>
+									<span className='text-xs text-muted-white'>
+										PDF, JPG, JPEG, JSON, CSV, XLSX
+									</span>
+								</div>
+								<input
+									ref={fileInputRef}
+									type='file'
+									multiple
+									accept={ACCEPT_ATTRIBUTE}
+									onChange={handleFileInputChange}
+									className='hidden'
+								/>
+
+								{supportingFiles.length > 0 && (
+									<ul className='space-y-1 rounded-md border border-border bg-muted/40 p-3 text-sm text-white'>
+										{supportingFiles.map((file, index) => (
+											<li
+												key={`${file.name}-${file.lastModified}`}
+												className='flex items-center justify-between gap-2'
+											>
+												<span className='truncate'>
+													{file.name}
+												</span>
+												<Button
+													type='button'
+													variant='ghost'
+													size='icon'
+													onClick={() =>
+														handleRemoveFile(index)
+													}
+												>
+													<X className='h-4 w-4' />
+												</Button>
+											</li>
+										))}
+									</ul>
+								)}
+							</div>
+
+							<div className='space-y-2'>
 								<Label htmlFor='targetCondition'>
 									Target Condition *
 								</Label>
@@ -207,6 +434,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									className='text-black'
 								/>
 							</div>
+							{renderTabNavigation('basic')}
 						</TabsContent>
 
 						<TabsContent value='demographics' className='space-y-4'>
@@ -228,6 +456,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									className='text-black'
 								/>
 							</div>
+							{renderTabNavigation('demographics')}
 						</TabsContent>
 
 						<TabsContent value='mechanism' className='space-y-4'>
@@ -268,6 +497,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									className='text-black'
 								/>
 							</div>
+							{renderTabNavigation('mechanism')}
 						</TabsContent>
 
 						<TabsContent value='safety' className='space-y-4'>
@@ -289,6 +519,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									className='text-black'
 								/>
 							</div>
+							{renderTabNavigation('safety')}
 						</TabsContent>
 					</Tabs>
 
@@ -307,7 +538,9 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 						type='submit'
 						disabled={isLoading}
 						// className='w-full bg-gradient-primary  hover:shadow-scientific transition-all duration-300'
-						className='w-full'
+						className={`w-full ${
+							activeTab === tabOrder[tabOrder.length - 1] ? 'block' : 'hidden'
+						}`}
 						size='lg'
 					>
 						{isLoading ? (
