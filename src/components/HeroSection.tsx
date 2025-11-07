@@ -28,7 +28,7 @@ const HeroSection = () => {
 						}}
 					>
 						Accelerate{' '}
-						<span className='text-orange-500'>FDA approvals</span>{' '}
+						<span className='text-orange-500'>FDA Approvals</span>{' '}
 						using AI
 					</h1>
 
