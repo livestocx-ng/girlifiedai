@@ -603,7 +603,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								Simulating Trial...
 							</>
 						) : (
-							'Start AI Clinical Simulation'
+							'Start AI Analysis'
 						)}
 					</Button>
 				</form>
