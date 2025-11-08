@@ -131,8 +131,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 
 		if (
 			!formData.productName ||
-			!formData.productType ||
-			!formData.targetCondition
+			!formData.productType 
+			// || !formData.targetCondition
 		) {
 			toast({
 				title: 'Required Fields Missing',
@@ -143,22 +143,22 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 			return;
 		}
 
-		const hasVisitedAllTabs = tabOrder.every((tab) => visitedTabs.has(tab));
+		// const hasVisitedAllTabs = tabOrder.every((tab) => visitedTabs.has(tab));
 
-		if (!hasVisitedAllTabs) {
-			const nextTab = tabOrder.find((tab) => !visitedTabs.has(tab));
-			if (nextTab) {
-				goToTab(nextTab);
-			}
+		// if (!hasVisitedAllTabs) {
+		// 	const nextTab = tabOrder.find((tab) => !visitedTabs.has(tab));
+		// 	if (nextTab) {
+		// 		goToTab(nextTab);
+		// 	}
 
-			toast({
-				title: 'Review Required Sections',
-				description:
-					'Please review each tab of the form before submitting your request.',
-				variant: 'destructive',
-			});
-			return;
-		}
+		// 	toast({
+		// 		title: 'Review Required Sections',
+		// 		description:
+		// 			'Please review each tab of the form before submitting your request.',
+		// 		variant: 'destructive',
+		// 	});
+		// 	return;
+		// }
 
 		const payload: DemoFormSubmitPayload = {
 			...formData,
@@ -250,10 +250,10 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 				<form onSubmit={handleSubmit} className='space-y-6'>
 					<Tabs
 						value={activeTab}
-						onValueChange={handleTabChange}
+						// onValueChange={handleTabChange}
 						className='w-full'
 					>
-						<TabsList className='grid w-full grid-cols-4'>
+						{/* <TabsList className='grid w-full grid-cols-4'>
 							<TabsTrigger
 								value='basic'
 								className='flex items-center gap-2'
@@ -282,7 +282,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								<Shield className='w-4 h-4' />
 								Safety
 							</TabsTrigger>
-						</TabsList>
+						</TabsList> */}
 
 						<TabsContent value='basic' className='space-y-4'>
 							<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -339,6 +339,75 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 										</SelectContent>
 									</Select>
 								</div>
+							</div>
+
+							<div className='grid grid-cols-1 md:grid-cols2 gap-4'>
+								<div className='space-y-2'>
+									<Label htmlFor='developmentStage'>
+										Development Stage *
+									</Label>
+									<Select
+										value={formData.developmentStage}
+										onValueChange={(value) =>
+											handleInputChange(
+												'developmentStage',
+												value
+											)
+										}
+									>
+										<SelectTrigger className='text-black'>
+											<SelectValue placeholder='Select product type' />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectItem value='discovery'>
+												Discovery
+											</SelectItem>
+											<SelectItem value='preclinical-studies'>
+												Preclinical Studies
+											</SelectItem>
+											<SelectItem value='first-regulatory-filing'>
+												First Regulatory Filing
+											</SelectItem>
+											<SelectItem value='clinical-trials-phase-I'>
+												Clinical Trials Phase I
+											</SelectItem>
+											<SelectItem value='clinical-trials-phase-II'>
+												Clinical Trials Phase II
+											</SelectItem>
+											<SelectItem value='clinical-trials-phase-III'>
+												Clinical Trials Phase III
+											</SelectItem>
+											<SelectItem value='regulatory-filing-for-approval'>
+												Regulatory Filing For Approval
+											</SelectItem>
+											<SelectItem value='access-to-drug'>
+												Access To Drug
+											</SelectItem>
+											<SelectItem value='post-approval-studies'>
+												Post Approval Studies
+											</SelectItem>
+										</SelectContent>
+									</Select>
+								</div>
+
+								{/* <div className='space-y-2'>
+									<Label htmlFor='targetCondition'>
+										Target Condition *
+									</Label>
+									<Input
+										id='targetCondition'
+										value={formData.targetCondition}
+										onChange={(e) =>
+											handleInputChange(
+												'targetCondition',
+												e.target.value
+											)
+										}
+										placeholder='e.g., Type 2 Diabetes, Hypertension, Cancer'
+										required
+										className='text-black'
+									/>
+								</div> */}
 							</div>
 
 							<div className='space-y-2'>
@@ -399,76 +468,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								)}
 							</div>
 
-							<div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-								<div className='space-y-2'>
-									<Label htmlFor='developmentStage'>
-										Development Stage *
-									</Label>
-									<Select
-										value={formData.developmentStage}
-										onValueChange={(value) =>
-											handleInputChange(
-												'developmentStage',
-												value
-											)
-										}
-									>
-										<SelectTrigger className='text-black'>
-											<SelectValue placeholder='Select product type' />
-										</SelectTrigger>
-										<SelectContent>
-											<SelectItem value='discovery'>
-												Discovery
-											</SelectItem>
-											<SelectItem value='preclinical-studies'>
-												Preclinical Studies
-											</SelectItem>
-											<SelectItem value='first-regulatory-filing'>
-												First Regulatory Filing
-											</SelectItem>
-											<SelectItem value='clinical-trials-phase-I'>
-												Clinical Trials Phase I
-											</SelectItem>
-											<SelectItem value='clinical-trials-phase-II'>
-												Clinical Trials Phase II
-											</SelectItem>
-											<SelectItem value='clinical-trials-phase-III'>
-												Clinical Trials Phase III
-											</SelectItem>
-											<SelectItem value='regulatory-filing-for-approval'>
-												Regulatory Filing For Approval
-											</SelectItem>
-											<SelectItem value='access-to-drug'>
-												Access To Drug
-											</SelectItem>
-											<SelectItem value='post-approval-studies'>
-												Post Approval Studies
-											</SelectItem>
-										</SelectContent>
-									</Select>
-								</div>
-
-								<div className='space-y-2'>
-									<Label htmlFor='targetCondition'>
-										Target Condition *
-									</Label>
-									<Input
-										id='targetCondition'
-										value={formData.targetCondition}
-										onChange={(e) =>
-											handleInputChange(
-												'targetCondition',
-												e.target.value
-											)
-										}
-										placeholder='e.g., Type 2 Diabetes, Hypertension, Cancer'
-										required
-										className='text-black'
-									/>
-								</div>
-							</div>
-
-							<div className='space-y-2'>
+							{/* <div className='space-y-2'>
 								<Label htmlFor='description'>
 									Product Description
 								</Label>
@@ -486,10 +486,10 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									className='text-black'
 								/>
 							</div>
-							{renderTabNavigation('basic')}
+							{renderTabNavigation('basic')} */}
 						</TabsContent>
 
-						<TabsContent value='demographics' className='space-y-4'>
+						{/* <TabsContent value='demographics' className='space-y-4'>
 							<div className='space-y-2'>
 								<Label htmlFor='targetDemographics'>
 									Target Demographics
@@ -509,9 +509,9 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								/>
 							</div>
 							{renderTabNavigation('demographics')}
-						</TabsContent>
+						</TabsContent> */}
 
-						<TabsContent value='mechanism' className='space-y-4'>
+						{/* <TabsContent value='mechanism' className='space-y-4'>
 							<div className='space-y-2'>
 								<Label htmlFor='expectedMechanism'>
 									Expected Mechanism of Action
@@ -531,7 +531,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								/>
 							</div>
 
-							{/* <div className='space-y-2'>
+							<div className='space-y-2'>
 								<Label htmlFor='previousStudies'>
 									Previous Studies/Data
 								</Label>
@@ -548,11 +548,11 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									rows={3}
 									className='text-black'
 								/>
-							</div>*/}
+							</div>
 							{renderTabNavigation('mechanism')} 
-						</TabsContent>
+						</TabsContent> */}
 
-						<TabsContent value='safety' className='space-y-4'>
+						{/* <TabsContent value='safety' className='space-y-4'>
 							<div className='space-y-2'>
 								<Label htmlFor='riskAssessment'>
 									Known Risks & Contraindications
@@ -572,7 +572,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								/>
 							</div>
 							{renderTabNavigation('safety')}
-						</TabsContent>
+						</TabsContent> */}
 					</Tabs>
 
 					{isLoading && (
@@ -590,11 +590,10 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 						type='submit'
 						disabled={isLoading}
 						// className='w-full bg-gradient-primary  hover:shadow-scientific transition-all duration-300'
-						className={`w-full ${
-							activeTab === tabOrder[tabOrder.length - 1]
-								? 'block'
-								: 'hidden'
-						}`}
+						// ${activeTab === tabOrder[tabOrder.length - 1]
+						// 	? 'block'
+						// 	: 'hidden'}`
+						className={`w-full`}
 						size='lg'
 					>
 						{isLoading ? (
