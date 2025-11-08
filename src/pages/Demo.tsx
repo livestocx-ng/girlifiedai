@@ -75,9 +75,9 @@ export const Demo = () => {
 				formData.expectedMechanism
 					? `Expected mechanism of action: ${formData.expectedMechanism}`
 					: null,
-				formData.previousStudies
-					? `Previous studies or supporting data: ${formData.previousStudies}`
-					: null,
+				// formData.previousStudies
+				// 	? `Previous studies or supporting data: ${formData.previousStudies}`
+				// 	: null,
 				formData.riskAssessment
 					? `Known risks or contraindications: ${formData.riskAssessment}`
 					: null,

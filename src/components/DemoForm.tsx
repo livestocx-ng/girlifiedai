@@ -30,7 +30,7 @@ type DemoFormFields = {
 	description: string;
 	targetDemographics: string;
 	expectedMechanism: string;
-	previousStudies: string;
+	// previousStudies: string;
 	riskAssessment: string;
 };
 
@@ -53,7 +53,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 		developmentStage: '',
 		targetDemographics: '',
 		expectedMechanism: '',
-		previousStudies: '',
+		// previousStudies: '',
 		riskAssessment: '',
 	});
 	const [supportingFiles, setSupportingFiles] = useState<File[]>([]);
@@ -531,7 +531,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 								/>
 							</div>
 
-							<div className='space-y-2'>
+							{/* <div className='space-y-2'>
 								<Label htmlFor='previousStudies'>
 									Previous Studies/Data
 								</Label>
@@ -548,8 +548,8 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 									rows={3}
 									className='text-black'
 								/>
-							</div>
-							{renderTabNavigation('mechanism')}
+							</div>*/}
+							{renderTabNavigation('mechanism')} 
 						</TabsContent>
 
 						<TabsContent value='safety' className='space-y-4'>
