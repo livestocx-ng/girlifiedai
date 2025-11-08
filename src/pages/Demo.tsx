@@ -128,7 +128,7 @@ export const Demo = () => {
 					<Loader2 className='h-12 w-12 animate-spin text-primary' />
 					<div className='space-y-2'>
 						<p className='text-xl font-semibold text-foreground'>
-							Generating AI clinical report...
+							Generating AI analysis...
 						</p>
 						<p className='text-sm text-muted-foreground max-w-xl'>
 							{
@@ -161,8 +161,7 @@ export const Demo = () => {
 							AI Clinical Trial Demo
 						</h1>
 						<p className='text-xl max-w-3xl mx-auto'>
-							Experience the power of AI-driven clinical trial
-							simulation. Test your health product against
+							Experience the power of AI-driven analysis. Test your health product against
 							thousands of synthetic patients before expensive
 							human trials.
 						</p>
