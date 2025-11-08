@@ -20,8 +20,8 @@ export const Demo = () => {
 	const loadingMessages = useMemo(
 		() => [
 			'Analyzing FDA approval probability based on 20+ years of regulatory data...',
-			'Evaluating regulatory compliance and identifying potential risks...',
-			'Comparing your product against historical FDA approval patterns...',
+			// 'Evaluating regulatory compliance and identifying potential risks...',
+			// 'Comparing your product against historical FDA approval patterns...',
 		],
 		[]
 	);
