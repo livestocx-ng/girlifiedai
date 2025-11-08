@@ -131,7 +131,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 
 		if (
 			!formData.productName ||
-			!formData.productType 
+			!formData.productType
 			// || !formData.targetCondition
 		) {
 			toast({
@@ -238,11 +238,11 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 			<CardHeader className='bg-gradient-scientific text-white'>
 				<CardTitle className='text-2xl flex items-center gap-2'>
 					<Target className='w-6 h-6' />
-					AI Clinical Trial Simulation
+					FDA Approval Predictor
 				</CardTitle>
 				<CardDescription className='text-gray-200'>
-					Test your health product with our advanced AI models before
-					costly human trials
+					Get AI-powered insights on FDA approval probability and
+					regulatory requirements for your health product
 				</CardDescription>
 			</CardHeader>
 
@@ -579,8 +579,7 @@ export const DemoForm = ({onSubmit, isLoading}: DemoFormProps) => {
 						<div className='space-y-2'>
 							<div className='flex items-center gap-2 text-sm text-muted-foreground'>
 								<Loader2 className='w-4 h-4 animate-spin' />
-								Running AI simulation across 10,000+ synthetic
-								patients...
+								Analyzing your approval probability based on 20+ years of FDA data...
 							</div>
 							<Progress value={85} className='w-full' />
 						</div>

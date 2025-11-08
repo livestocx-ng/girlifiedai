@@ -33,7 +33,7 @@ export const ChatMessage = ({
 		// Remove "Thread ID: ..." line
 		.replace(/Thread ID:.*\n?/gi, '')
 		// Remove "Approval Rating (...)" line
-		.replace(/Approval Rating\s*\(\d+–100\)\s*\n?/gi, '')
+		// .replace(/Approval Rating\s*\(\d+–100\)\s*\n?/gi, '')
 		// Trim extra newlines
 		.trim();
 
