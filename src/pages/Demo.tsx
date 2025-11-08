@@ -19,9 +19,9 @@ export const Demo = () => {
 
 	const loadingMessages = useMemo(
 		() => [
-			'Generating AI-powered clinical trial insights...',
-			'Evaluating efficacy, safety, and demographic coverage...',
-			'Simulating thousands of synthetic patient journeys...',
+			'Analyzing FDA approval probability based on 20+ years of regulatory data...',
+			'Evaluating regulatory compliance and identifying potential risks...',
+			'Comparing your product against historical FDA approval patterns...',
 		],
 		[]
 	);
@@ -128,7 +128,7 @@ export const Demo = () => {
 					<Loader2 className='h-12 w-12 animate-spin text-primary' />
 					<div className='space-y-2'>
 						<p className='text-xl font-semibold text-foreground'>
-							Generating AI analysis...
+							Analyzing FDA Approval Probability...
 						</p>
 						<p className='text-sm text-muted-foreground max-w-xl'>
 							{
@@ -158,12 +158,13 @@ export const Demo = () => {
 						</Link>
 
 						<h1 className='text-4xl md:text-5xl font-bold'>
-							AI Clinical Trial Demo
+							FDA Approval Predictor Demo
 						</h1>
 						<p className='text-xl max-w-3xl mx-auto'>
-							Experience the power of AI-driven analysis. Test your health product against
-							thousands of synthetic patients before expensive
-							human trials.
+							Experience the power of AI-driven FDA approval
+							analysis. Predict your product's approval
+							probability and identify regulatory risks based on
+							20+ years of FDA data.
 						</p>
 					</div>
 				</div>
