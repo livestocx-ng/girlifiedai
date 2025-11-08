@@ -29,27 +29,27 @@ export const ChatMessage = ({
 		}
 	}, [content, currentIndex, isTyping]);
 
-	// const cleanedContent = content
-	// 	.replace(/Thread ID:.*\n?/gi, '')
-	// 	.trim();
+	const cleanedContent = content
+		.replace(/Thread ID:.*\n?/gi, '')
+		.trim();
 
-	let cleanedContent = content.replace(/Thread ID:.*\n?/gi, '').trim();
+	// let cleanedContent = content.replace(/Thread ID:.*\n?/gi, '').trim();
 
-	// Detect and style "Approval Rating XX%"
-	cleanedContent = cleanedContent.replace(
-		/Approval Rating\s+(\d+)%/i,
-		(_, rating) => {
-			const value = Number(rating);
-			let color = 'red';
-			if (value >= 70) color = 'green';
-			else if (value >= 40) color = 'orange';
+	// // Detect and style "Approval Rating XX%"
+	// cleanedContent = cleanedContent.replace(
+	// 	/Approval Rating\s+(\d+)%/i,
+	// 	(_, rating) => {
+	// 		const value = Number(rating);
+	// 		let color = 'red';
+	// 		if (value >= 70) color = 'green';
+	// 		else if (value >= 40) color = 'orange';
 
-			// Return styled span — this works since we’ll enable rehypeRaw
-			return `<span style="font-size:1.5rem; font-weight:700; color:${color};">
-      Approval Rating ${value}%
-    </span>`;
-		}
-	);
+	// 		// Return styled span — this works since we’ll enable rehypeRaw
+	// 		return `<span style="font-size:1.5rem; font-weight:700; color:${color};">
+  //     Approval Rating ${value}%
+  //   </span>`;
+	// 	}
+	// );
 
 	return (
 		<motion.div
