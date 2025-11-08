@@ -40,11 +40,13 @@ const HeroSection = () => {
 					>
 						{/* Test, validate, and improve your health products before
 						costly clinical trials. */}
-						Use AI-driven regulatory and clinical simulation to
-						refine your health products before costly trials.
+						{/* Use AI-driven regulatory and clinical simulation to
+						refine your health products before costly trials. */}
+						Harness AI to forecast FDA decisions and streamline documentation.
+						Shorten approval timelines and reduce regulatory risk.
 					</p>
 
-					<p
+					{/* <p
 						className='text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium text-white'
 						style={{
 							textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)',
@@ -52,7 +54,7 @@ const HeroSection = () => {
 					>
 						Build safer, faster, and more effective biotech
 						innovations.
-					</p>
+					</p> */}
 
 					<div className='flex flex-col sm:flex-row gap-4 justify-center items-center'>
 						<Button
